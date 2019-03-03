@@ -3,12 +3,7 @@ module SumOfMultiples
         )
 where
 
-naturalNumbersUnder :: Integer -> [Integer]
-naturalNumbersUnder n = [1 .. n - 1]
-
-isMultipleOf :: Integer -> [Integer] -> Bool
-isMultipleOf n = or . fmap (\m -> m /= 0 && (n `mod` m == 0))
-
 sumOfMultiples :: [Integer] -> Integer -> Integer
-sumOfMultiples multiples =
-        sum . filter (`isMultipleOf` multiples) . naturalNumbersUnder
+sumOfMultiples multiples n =
+        let isMultiple x = any (\m -> m /= 0 && (x `rem` m == 0)) multiples
+        in  sum $ filter isMultiple [1 .. n - 1]
